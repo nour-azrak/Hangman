@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Hangman game...\n A name of a random European city has been rendomly chosen for you to guess\n");
+            Console.WriteLine("Welcome to the Hangman game...\nA name of a random European city has been rendomly chosen for you to guess\n");
 
             const int MAXIMUM_NUMBER_OF_FAULTS = 5;
             int maximumNumberOfFaults = MAXIMUM_NUMBER_OF_FAULTS;
@@ -49,7 +49,7 @@
                 if (!randomlySelectedWord.Contains(guessedChar))
                 {
                     maximumNumberOfFaults--;
-                    
+                    continue;
                 }
                 for (int i = 0; i < randomlySelectedWord.Count; i++)
                 {
@@ -58,6 +58,14 @@
                         Guessword[i] = guessedChar;
                     }
                 }
+                Console.Clear();
+                if (Guessword == randomlySelectedWord)
+                {
+                    Console.WriteLine("\n You won\n");
+                    break;
+                }
+
+                Console.WriteLine("You lost");
 
             }
 
