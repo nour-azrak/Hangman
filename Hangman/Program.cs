@@ -11,11 +11,11 @@
 
             // Define the líst of all words
             List<string> listOfWordsToGuess = new List<string>();
-            listOfWordsToGuess.Add("Copenhagen");
-            listOfWordsToGuess.Add("Salzburg");
-            listOfWordsToGuess.Add("Budapest");
-            listOfWordsToGuess.Add("Thessaloniki");
-            listOfWordsToGuess.Add("Barcelona");
+            listOfWordsToGuess.Add("copenhagen");
+            listOfWordsToGuess.Add("salzburg");
+            listOfWordsToGuess.Add("budapest");
+            listOfWordsToGuess.Add("thessaloniki");
+            listOfWordsToGuess.Add("barcelona");
 
             // Create a random index for the word to be guessed from the list
             Random rnd = new Random();
@@ -38,7 +38,7 @@
             {
                 Console.WriteLine($"\nYou have {maximumNumberOfFaults} attempts left");
                 Console.WriteLine("\nYour current guess: " + string.Concat(Guessword));
-                Console.Write("\nPlease input the charachter to guess. Make sure the first Guess is a capital letter: ");
+                Console.Write("\nPlease input the charachter to guess. There is no capital letters. The guessing squence is not relevant: ");
                 guessedChar = Console.ReadKey().KeyChar;
 
                 if (!char.IsAsciiLetter(guessedChar))
@@ -49,6 +49,13 @@
                 if (!randomlySelectedWord.Contains(guessedChar))
                 {
                     maximumNumberOfFaults--;
+                    Thread.Sleep(500);
+                    Console.Clear();
+                    continue;
+                }
+                if (Guessword.Contains(guessedChar))
+                {
+                    Console.WriteLine("\nYou already guessed this charachter please enter another one\n");
                     continue;
                 }
                 for (int i = 0; i < randomlySelectedWord.Count; i++)
@@ -56,19 +63,20 @@
                     if(guessedChar == randomlySelectedWord[i])
                     {
                         Guessword[i] = guessedChar;
+                        Console.Clear();
                     }
                 }
-                Console.Clear();
-                if (Guessword == randomlySelectedWord)
+                if (Guessword.SequenceEqual(randomlySelectedWord))
                 {
                     Console.WriteLine("\n You won\n");
-                    break;
+                    return;
                 }
 
-                Console.WriteLine("You lost");
+                Console.Clear();
 
             }
-
+            Console.Clear ();
+            Console.WriteLine("\n\nYou lost");
 
 
 
